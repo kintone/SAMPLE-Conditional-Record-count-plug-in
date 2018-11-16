@@ -2,7 +2,7 @@
  * This sample code calculates the total number of records with a given value,
  * and displays the total at the top of the record list page.
  * If the record list has a filter condition,
- * the calculation will take in account of the filter condition.
+ * the calculation will take the filter condition into account.
  * Copyright (c) 2018 Cybozu
  *
  * Licensed under the MIT License
@@ -10,7 +10,7 @@
 (function(PLUGIN_ID) {
     'use strict';
 
-    // Get plugin configuration settings
+    // Get plug-in configuration settings
     var CONFIG = kintone.plugin.app.getConfig(PLUGIN_ID);
     // Get each settings
     if (!CONFIG) {
@@ -21,8 +21,8 @@
         return htmlstr.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
             .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
     }
-    var DROPDOWN = CONFIG.dropdown_field; //field code of dropdown field
-    var DROPDOWN_CHOICE1 = CONFIG.dropdown_choice; //name of dropdown choice
+    var DROPDOWN = CONFIG.dropdown_field; // Field code of drop-down field
+    var DROPDOWN_CHOICE1 = CONFIG.dropdown_choice; // Name of drop-down choice
 
     // Record List Event
     kintone.events.on('app.record.index.show', function(event) {
