@@ -27,7 +27,7 @@
     "en": "Record Count Plug-in"
   },
   "description": {
-    "en": "This sample plugin calculates the total number of records with a given value, and displays the total at the top of the record list page."
+    "en": "This sample plug-in calculates the total number of records with a given value, and displays the total at the top of the record list page."
   },
   "homepage_url": {
     "en": "https://developer.kintone.io/hc/en-us/articles/115008765567"
