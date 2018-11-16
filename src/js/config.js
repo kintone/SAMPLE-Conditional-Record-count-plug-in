@@ -12,7 +12,7 @@ jQuery.noConflict();
     var DROPDOWN_VALUES = new Map();
 
     function setDropDown() {
-        // Retrieve field information, then set dropdown
+        // Retrieve field information, then set drop-down
         return kintone.api(kintone.api.url('/k/v1/preview/app/form/fields', true), 'GET',
             {'app': kintone.app.getId()}).then(function(resp) {
 
@@ -37,10 +37,10 @@ jQuery.noConflict();
             return alert('Failed to retrieve field(s) information');
         });
     }
-    function setDropdownValue() {//Set dropdown values based on dorpdown selected.
+    function setDropdownValue() {//Set drop-down values based on drop-down selected.
         var dropdown_field = $('#select_dropdown_field').val();
         if (dropdown_field === null) {
-            return;//Return if the first dropdown is not yet selected.
+            return;//Return if the first drop-down is not yet selected.
         }
         $('#select_dropdown_value').empty();
         var opt = DROPDOWN_VALUES.get(dropdown_field);
@@ -62,7 +62,7 @@ jQuery.noConflict();
         }
     }
     $(document).ready(function() {
-        // Set dropdown list
+        // Set drop-down list
         setDropDown()
             .then(setDropdownValue);
         // Set input values when 'Save' button is clicked
@@ -83,7 +83,7 @@ jQuery.noConflict();
         $('#check-plugin-cancel').click(function() {
             history.back();
         });
-        // Populate the second dropdown when the first dropdown is changed.
+        // Populate the second drop-down when the first drop-down is changed.
         $('#select_dropdown_field').change(function() {
             setDropdownValue();
         });
