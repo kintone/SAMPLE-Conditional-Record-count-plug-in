@@ -1,4 +1,4 @@
-# [Sample plug-in: Record Count Plug-in]
+# [Sample plug-in: Conditional Record Count Plug-in]
 ## Purpose of the Sample Plug-in
 This sample plug-in is available for educational purposes.  
 Use this plug-in to understand how Kintone plug-ins work, and how they are structured.
@@ -28,7 +28,7 @@ src/
 To simply test out the plug-in on your Kintone domain, follow these steps:
 
 1. Download the plug-in zip file  
-Reference: https://github.com/kintone/SAMPLE-Date-input-button-Plug-in/releases
+Reference: https://github.com/kintone/SAMPLE-Conditional-Record-count-plug-in/releases
 2. Install the plug-in into your domain  
 Reference: https://get.kintone.help/hc/en-us/articles/115001519707-Installing-Viewing-Plug-ins
 3. Add the plug-in to a specific Kintone App  
