@@ -1,39 +1,43 @@
 <!-- MIT License
 Copyright (c) 2018 Cybozu
 https://github.com/kintone/SAMPLE-Record-count-plug-in/blob/master/LICENSE -->
-<div>
-	<div class="block">
-		<label class="kintoneplugin-label">
-			<span id ="container1_label">Field with Conditional Value</span>
-			<span class="kintoneplugin-require">*</span>
-		</label>
-		<div class="kintoneplugin-row">Please select a drop-down field that stores the conditional value.</div>
-		<div class="kintoneplugin-select-outer">
-			<div class="kintoneplugin-select">
-				<select id="select_dropdown_field" name="select_dropdown_field">
-					<option value="">-----</option>
-				</select>
+<section>
+	<form class="js-submit-settings">
+		<div class="kintoneplugin-row">
+			<label for="select_dropdown_field" class="kintoneplugin-label">
+				Field with Conditional Value
+				<span class="kintoneplugin-require">*</span>
+			</label>
+			<p class="kintoneplugin-desc">Please select a drop-down field that stores the conditional value.</p>
+			<div class="kintoneplugin-select-outer">
+				<div class="kintoneplugin-select">
+					<select name="js-select_dropdown_field" id="select_dropdown_field" required>
+						<option value="">-----</option>
+					</select>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class="block">
-		<label class="kintoneplugin-label">
-			<span id ="container2_label">Conditional Value</span>
-			<span class="kintoneplugin-require">*</span>
-		</label>
-		<div class="kintoneplugin-row">Please select a value that exists in the drop-down selected in the previous setting.<br /> 
-			The number of records that hold this value will be counted by the plug-in.<br /> 
-			The total count will be displayed in the header of the record list.</div>
-		<div class="kintoneplugin-input-outer">
-			<div class="kintoneplugin-select">
-				<select id="select_dropdown_value" name="select_dropdown_value">
-					<option value="">-----</option>
-				</select>
+		<div class="kintoneplugin-row">
+			<label for="" class="kintoneplugin-label">
+				Conditional Value
+				<span class="kintoneplugin-require">*</span>
+			</label>
+			<p class="kintoneplugin-desc">
+				Please select a value that exists in the drop-down selected in the previous setting.<br /> 
+				The number of records that hold this value will be counted by the plug-in.<br /> 
+				The total count will be displayed in the header of the record list.
+			</p>
+			<div class="kintoneplugin-input-outer">
+				<div class="kintoneplugin-select">
+					<select name="js-select_dropdown_value" id="select_dropdown_value" required>
+						<option value="">-----</option>
+					</select>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class="block">
-		<button type="button" id="check-plugin-cancel" class="kintoneplugin-button-dialog-cancel">　Cancel　</button>
-		<button type="button" id="check-plugin-submit" class="kintoneplugin-button-dialog-ok">　Save　</button>
-	</div>
-</div>
+		<p class="kintoneplugin-row">
+			<button type="button" class="js-cancel-button kintoneplugin-button-dialog-cancel">Cancel</button>
+			<button class="kintoneplugin-button-dialog-ok">Save</button>
+		</p>
+	</form>
+</section>

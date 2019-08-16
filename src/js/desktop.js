@@ -12,6 +12,9 @@
 
   // Get plug-in configuration settings
   var CONFIG = kintone.plugin.app.getConfig(PLUGIN_ID);
+
+  var DROPDOWN, DROPDOWN_CHOICE1;
+
   // Get each settings
   if (!CONFIG) {
     return false;
@@ -21,8 +24,9 @@
     return htmlstr.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
   }
-  var DROPDOWN = CONFIG.dropdown_field; // Field code of drop-down field
-  var DROPDOWN_CHOICE1 = CONFIG.dropdown_choice; // Name of drop-down choice
+
+  DROPDOWN = CONFIG.dropdown_field; // Field code of drop-down field
+  DROPDOWN_CHOICE1 = CONFIG.dropdown_choice; // Name of drop-down choice
 
   // Record List Event
   kintone.events.on('app.record.index.show', function(event) {
