@@ -6,10 +6,10 @@ https://github.com/kintone/SAMPLE-Record-count-plug-in/blob/master/LICENSE
 jQuery.noConflict();
 (function($, PLUGIN_ID) {
   'use strict';
+  
   // Get configuration settings
-
   var CONF = kintone.plugin.app.getConfig(PLUGIN_ID);
-  var DROPDOWN_VALUES = new Map();
+  var DROPDOWN_VALUES = {};
 
   var $form = $('.js-submit-settings');
   var $cancelButton = $('.js-cancel-button');
@@ -34,7 +34,7 @@ jQuery.noConflict();
           $option.attr('value', prop.code);
           $option.text(escapeHtml(prop.label));
           $selectDropdown.append($option.clone());
-          DROPDOWN_VALUES.set(prop.code, prop.options);
+          DROPDOWN_VALUES[prop.code] = prop.options;
         }
       });
 
@@ -52,7 +52,7 @@ jQuery.noConflict();
       return; // Return if the first drop-down is not yet selected.
     }
     $selectDropdownValue.empty();
-    opt = DROPDOWN_VALUES.get(dropdown_field);
+    opt = DROPDOWN_VALUES[dropdown_field];
     Object.keys(opt).forEach(function(key) {
       var prop = opt[key];
       var $option = $('<option>');
