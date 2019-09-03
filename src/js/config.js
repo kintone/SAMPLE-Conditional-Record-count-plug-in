@@ -1,64 +1,71 @@
 /*
 MIT License
 Copyright (c) 2018 Cybozu
-https://github.com/kintone/SAMPLE-Record-count-plug-in/blob/master/LICENSE
+https://github.com/kintone/SAMPLE-Conditional-record-count-plug-in/blob/master/LICENSE
 */
 jQuery.noConflict();
 (function($, PLUGIN_ID) {
   'use strict';
-  // Get configuration settings
 
+  // Get configuration settings
   var CONF = kintone.plugin.app.getConfig(PLUGIN_ID);
-  var DROPDOWN_VALUES = new Map();
+  var DROPDOWN_VALUES = {};
+
+  var $form = $('.js-submit-settings');
+  var $cancelButton = $('.js-cancel-button');
+  var $selectDropdown = $('select[name="js-select_dropdown_field"]');
+  var $selectDropdownValue = $('select[name="js-select_dropdown_value"]');
+
+  function escapeHtml(htmlstr) {
+    return htmlstr.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
 
   function setDropDown() {
     // Retrieve field information, then set drop-down
     return kintone.api(kintone.api.url('/k/v1/preview/app/form/fields', true), 'GET',
       {'app': kintone.app.getId()}).then(function(resp) {
 
-      for (var key in resp.properties) {
-        if (!resp.properties.hasOwnProperty(key)) {
-          continue;
-        }
+      Object.keys(resp.properties).forEach(function(key) {
         var prop = resp.properties[key];
         var $option = $('<option>');
 
         if (prop.type === 'DROP_DOWN') {
           $option.attr('value', prop.code);
-          $option.text(prop.label);
-          $('#select_dropdown_field').append($option.clone());
-          DROPDOWN_VALUES.set(prop.code, prop.options);
+          $option.text(escapeHtml(prop.label));
+          $selectDropdown.append($option.clone());
+          DROPDOWN_VALUES[prop.code] = prop.options;
         }
-      }
+      });
+
       // Set default values
-      $('#select_dropdown_field').val(CONF.dropdown_field);
+      $selectDropdownValue.val(CONF.dropdown_field);
 
     }, function(resp) {
       return alert('Failed to retrieve field(s) information');
     });
   }
-  function setDropdownValue() {//Set drop-down values based on drop-down selected.
-    var dropdown_field = $('#select_dropdown_field').val();
-    if (dropdown_field === null) {
-      return;//Return if the first drop-down is not yet selected.
+  function setDropdownValue() { // Set drop-down values based on drop-down selected.
+    var dropdown_field = $selectDropdown.val();
+    var opt;
+    if (!dropdown_field) {
+      return; // Return if the first drop-down is not yet selected.
     }
-    $('#select_dropdown_value').empty();
-    var opt = DROPDOWN_VALUES.get(dropdown_field);
-    for (var key in opt) {
-      if (!opt.hasOwnProperty(key)) {
-        continue;
-      }
+    $selectDropdownValue.empty();
+    opt = DROPDOWN_VALUES[dropdown_field];
+    Object.keys(opt).forEach(function(key) {
       var prop = opt[key];
       var $option = $('<option>');
 
       $option.attr('value', prop.label);
-      $option.text(prop.label);
-      $('#select_dropdown_value').append($option.clone());
-    }
+      $option.text(escapeHtml(prop.label));
+      $selectDropdownValue.append($option.clone());
+    });
+
     // Set default values
-    $('#select_dropdown_value').val(CONF.dropdown_choice);
-    if ($('#select_dropdown_value').val() === null) {//Set first option if no value is selected.
-      $('#select_dropdown_value option:first').attr('selected', 'selected');
+    $selectDropdownValue.val(CONF.dropdown_choice);
+    if ($selectDropdownValue.val() === null) { // Set first option if no value is selected.
+      $('select[name="js-select_dropdown_value"] option:first').attr('selected', 'selected');
     }
   }
   $(document).ready(function() {
@@ -66,25 +73,27 @@ jQuery.noConflict();
     setDropDown()
       .then(setDropdownValue);
     // Set input values when 'Save' button is clicked
-    $('#check-plugin-submit').click(function() {
+    $form.on('submit', function(e) {
       var config = [];
-      var dropdown_field = $('#select_dropdown_field').val();
-      var dropdown_choice = $('#select_dropdown_value').val();
-      // Check required fields
-      if (dropdown_field === '' || dropdown_choice === '' || dropdown_choice === null) {
-        alert('Please set required field(s)');
-        return;
-      }
+      var dropdown_field = $selectDropdown.val();
+      var dropdown_choice = $selectDropdownValue.val();
+      e.preventDefault();
+
       config.dropdown_field = dropdown_field;
       config.dropdown_choice = dropdown_choice;
-      kintone.plugin.app.setConfig(config);
+
+      kintone.plugin.app.setConfig(config, function() {
+        alert('The plug-in settings have been saved. Please update the app!');
+        window.location.href = '/k/admin/app/flow?app=' + kintone.app.getId();
+      });
     });
+
     // Process when 'Cancel' is clicked
-    $('#check-plugin-cancel').click(function() {
-      history.back();
+    $cancelButton.on('click', function() {
+      window.location.href = '/k/admin/app/' + kintone.app.getId() + '/plugin/';
     });
     // Populate the second drop-down when the first drop-down is changed.
-    $('#select_dropdown_field').change(function() {
+    $selectDropdown.change(function() {
       setDropdownValue();
     });
   });

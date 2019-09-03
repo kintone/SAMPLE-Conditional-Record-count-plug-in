@@ -24,7 +24,7 @@
     ]
   },
   "name": {
-    "en": "Related record Count Plug-in"
+    "en": "Conditional Record Count Plug-in"
   },
   "description": {
     "en": "This sample plug-in calculates the total number of records with a given value, and displays the total at the top of the record list page."
