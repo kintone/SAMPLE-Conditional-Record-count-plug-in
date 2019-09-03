@@ -1,12 +1,12 @@
 /*
 MIT License
 Copyright (c) 2018 Cybozu
-https://github.com/kintone/SAMPLE-Record-count-plug-in/blob/master/LICENSE
+https://github.com/kintone/SAMPLE-Conditional-record-count-plug-in/blob/master/LICENSE
 */
 jQuery.noConflict();
 (function($, PLUGIN_ID) {
   'use strict';
-  
+
   // Get configuration settings
   var CONF = kintone.plugin.app.getConfig(PLUGIN_ID);
   var DROPDOWN_VALUES = {};
