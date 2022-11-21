@@ -39,7 +39,7 @@ jQuery.noConflict();
       });
 
       // Set default values
-      $selectDropdownValue.val(CONF.dropdown_field);
+      $selectDropdown.val(CONF.dropdown_field);
 
     }, function(resp) {
       return alert('Failed to retrieve field(s) information');
