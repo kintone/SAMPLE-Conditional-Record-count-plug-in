@@ -74,7 +74,7 @@ jQuery.noConflict();
       .then(setDropdownValue);
     // Set input values when 'Save' button is clicked
     $form.on('submit', function(e) {
-      var config = [];
+      var config = {};
       var dropdown_field = $selectDropdown.val();
       var dropdown_choice = $selectDropdownValue.val();
       e.preventDefault();
